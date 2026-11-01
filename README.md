@@ -142,7 +142,7 @@ Before the first edit to a label, its original contents are backed up to `.yolo_
 
 ## Development
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for formatting, tests, architecture, and packaging. GitHub Actions runs checks on pushes and pull requests. All automated tests use temporary synthetic datasets.
+GitHub Actions runs checks on pushes and pull requests. All automated tests use temporary synthetic datasets.
 
 Dataset images, labels, model files, local backups, environments, and build artifacts are excluded by `.gitignore`. Share the project source separately from your datasets.
 

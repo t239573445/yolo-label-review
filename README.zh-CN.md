@@ -142,7 +142,7 @@ class_id x_center y_center width height
 
 ## 开发
 
-开发环境、测试、代码格式、架构和构建命令见 [CONTRIBUTING.md](CONTRIBUTING.md)。GitHub Actions 在推送和 Pull Request 时自动检查。所有自动测试都使用临时生成的数据。
+GitHub Actions 在推送和 Pull Request 时自动检查。所有自动测试都使用临时生成的数据。
 
 `.gitignore` 排除了图片、标签、模型、审核备份、虚拟环境和构建缓存。分享软件时，项目源码和数据集分别管理。
 
