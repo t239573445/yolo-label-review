@@ -2,7 +2,23 @@
 
 English | [简体中文](README.zh-CN.md)
 
-A desktop tool for reviewing YOLO object detection annotations. Inspect images, delete incorrect boxes, and draw missing boxes directly on the image. Every edit is saved automatically.
+**Drag a box. Release to save.**
+
+A desktop tool for reviewing YOLO object detection annotations. Draw missing boxes directly on the image with the left mouse button. Every change saves automatically: there is no drawing-tool button to activate and no Save button to click.
+
+![Drag a box, release to save automatically, and use A/D to browse](docs/assets/draw-save-en.gif)
+
+*Recorded in the application using a synthetic demo image: draw, release to save, then press D for the next image.*
+
+## Start reviewing in three steps
+
+| What you see | What you do | What happens |
+| --- | --- | --- |
+| A missing box | Hold the left mouse button, drag around the object, and release | The new box is saved immediately |
+| An incorrect box | Click its row on the right, then press **Delete** | The selected box is highlighted; deleting it saves immediately |
+| Ready for the next image | Press **D**; use **A** to go back | Hold either key to keep browsing; release to stop |
+
+**Just draw → release → continue.** You can also start a new box inside an existing one. For a dataset with multiple classes, choose the class in the right sidebar before drawing; that choice is reused for subsequent boxes. Press **Ctrl+Z** to undo an edit on the current image.
 
 ## Features
 
@@ -18,26 +34,58 @@ A desktop tool for reviewing YOLO object detection annotations. Inspect images, 
 
 Requires Python **3.10+**, PyQt5, and a graphical desktop. Linux, Windows, and macOS can run PyQt5; local validation was performed on Linux. CI checks Python 3.10 and 3.12 on Linux.
 
-Download or clone this repository, then open a terminal in its directory:
+### Get the code
+
+This repository is currently private. To let someone use it, invite their GitHub account in the repository's **Settings → Collaborators**; they must accept the invitation before opening or cloning it. You can also share a source ZIP directly with them. Sharing access does not make the repository public.
+
+On the [repository page](https://github.com/t239573445/yolo-label-review), select **Code → Download ZIP** and extract it, or clone it after signing in to GitHub:
 
 ```bash
-python -m venv .venv
+git clone https://github.com/t239573445/yolo-label-review.git
+cd yolo-label-review
 ```
 
-Activate the environment with `source .venv/bin/activate` on Linux/macOS or `.venv\Scripts\Activate.ps1` in Windows PowerShell. Then install from the local checkout:
+### Install once
+
+Open a terminal in the extracted or cloned project folder.
+
+**Linux / macOS**
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install .
 ```
 
-## Run
+**Windows PowerShell**
 
-```bash
-yolo-review "/path/to/dataset" --lang en
-yolo-review "/path/to/dataset" --lang zh
+```powershell
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install .
 ```
 
-The equivalent module command is `python -m yolo_review "/path/to/dataset"`. If no path is provided, the current working directory is used. Paths containing spaces must be quoted. For a source checkout, `python review_annotations.py "/path/to/dataset"` also works after installing the dependencies in `requirements.txt`.
+The install command also installs PyQt5. No GPU, model weights, or model inference service is needed. This project is not published to PyPI; install from the downloaded project folder as shown above.
+
+## Run
+
+Replace the example path with your own dataset folder, containing `images/` and `labels/`.
+
+**Linux / macOS** (activate the same environment again when opening a new terminal):
+
+```bash
+source .venv/bin/activate
+yolo-review "/path/to/dataset" --lang en
+```
+
+**Windows PowerShell** (from the project folder):
+
+```powershell
+.\.venv\Scripts\yolo-review.exe "D:\datasets\my-dataset" --lang en
+```
+
+Use `--lang zh` for Chinese. Once the image appears, drag to add a box and release to save it. Every addition, deletion, undo, and redo is saved automatically.
+
+With the virtual environment activated, the equivalent module command is `python -m yolo_review "/path/to/dataset"`. If no path is provided, the current working directory is used. Paths containing spaces must be quoted. For a source checkout, `python review_annotations.py "/path/to/dataset"` also works after installing the dependencies in `requirements.txt`.
 
 Use the **Language / 语言** selector at the top of the window to change language. The default `--lang auto` uses the dataset's saved language, then the system locale (Chinese for Chinese locales, English otherwise). An explicit `--lang en` or `--lang zh` takes precedence. Class names are never translated.
 
@@ -92,21 +140,11 @@ Before the first edit to a label, its original contents are backed up to `.yolo_
 
 `.yolo_review/state.json` stores position and language. Opening images, selecting boxes, and changing language do not rewrite labels. Automatic review backups are local to the dataset; copy them with the dataset if needed.
 
-## Development and GitHub
+## Development
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for formatting, tests, architecture, and packaging. GitHub Actions runs checks on pushes and pull requests. All automated tests use temporary synthetic datasets.
 
-Upload **this project directory**, which contains source code and documentation. Dataset images, labels, model files, local backups, environments, and build artifacts are excluded by `.gitignore`. To publish to your own empty GitHub repository, replace `YOUR_ACCOUNT` with your account:
-
-```bash
-git init -b main
-git add .
-git commit -m "Initial YOLO Label Review release"
-git remote add origin https://github.com/YOUR_ACCOUNT/yolo-label-review.git
-git push -u origin main
-```
-
-This project is not yet published to PyPI. Install from the repository or a locally built wheel.
+Dataset images, labels, model files, local backups, environments, and build artifacts are excluded by `.gitignore`. Share the project source separately from your datasets.
 
 ## License
 

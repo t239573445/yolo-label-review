@@ -10,6 +10,7 @@ from dataclasses import dataclass
 MESSAGES = {
     "en": {
         "app_title": "YOLO Label Review",
+        "quick_start": "Drag to draw. Release to save. No tool selection or Save click needed.",
         "autosave_on": "Autosave enabled",
         "saving": "Saving…",
         "saved": "✓ Saved automatically",
@@ -19,7 +20,7 @@ MESSAGES = {
         "select_hint": "Select a row to highlight its box · Delete to remove",
         "new_class": "Class for new boxes",
         "class_name": "Class {id}",
-        "draw_help": "Hold the left mouse button and drag to add a box.\nYou can start inside an existing box.\n\nMouse wheel: zoom\nMiddle button + drag: pan\nF: fit image\nEsc: cancel drawing / selection",
+        "draw_help": "Drag with the left mouse button to draw.\nRelease to add and save the box.\nNo drawing tool or Save button needed.\n\nMouse wheel: zoom\nMiddle button + drag: pan\nF: fit image\nEsc: cancel drawing / selection",
         "delete": "Delete selected  ·  Del",
         "undo": "Undo  Ctrl+Z",
         "redo": "Redo",
@@ -46,6 +47,7 @@ MESSAGES = {
     },
     "zh": {
         "app_title": "YOLO 标注审核",
+        "quick_start": "直接拖框，松开即保存。无需选择绘框工具，无需点击保存按钮。",
         "autosave_on": "自动保存已开启",
         "saving": "正在保存…",
         "saved": "✓ 已自动保存",
@@ -55,7 +57,7 @@ MESSAGES = {
         "select_hint": "点击条目高亮对应框 · Delete 删除",
         "new_class": "新增框类别",
         "class_name": "类别 {id}",
-        "draw_help": "直接按住鼠标左键拖动，松开即新增。\n框内也可起笔，方便补充重叠目标。\n\n滚轮：缩放图片\n中键拖动：平移图片\nF：适应窗口\nEsc：取消绘制 / 取消选择",
+        "draw_help": "按住鼠标左键拖框，松开即新增并保存。\n无需切换工具，也不用点击保存。\n已有框内部也可起笔。\n\n滚轮：缩放图片\n中键拖动：平移图片\nF：适应窗口\nEsc：取消绘制 / 取消选择",
         "delete": "删除选中框  ·  Del",
         "undo": "撤销  Ctrl+Z",
         "redo": "重做",

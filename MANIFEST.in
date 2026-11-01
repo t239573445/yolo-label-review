@@ -1,4 +1,5 @@
 include README.md README.zh-CN.md CONTRIBUTING.md LICENSE
 include requirements.txt requirements-dev.txt
 include review_annotations.py
+recursive-include docs/assets *.gif
 recursive-include tests *.py

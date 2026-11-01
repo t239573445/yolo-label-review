@@ -3,6 +3,7 @@
 STYLESHEET = """
             QMainWindow, QWidget { background: #1b2230; color: #e5ecf5; font-size: 13px; }
             QLabel#appTitle { font-size: 23px; font-weight: 700; }
+            QLabel#quickStart { color: #8fe8bc; background: #24372f; padding: 10px 12px; border-radius: 5px; font-size: 14px; }
             QLabel#sectionTitle { font-size: 16px; font-weight: 600; }
             QLabel#filename { color: #b3c2d5; }
             QLabel#saveState { color: #69e7ad; padding: 6px 12px; background: #243d37; border-radius: 5px; }

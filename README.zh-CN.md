@@ -2,7 +2,23 @@
 
 [English](README.md) | 简体中文
 
-用于审核 YOLO 目标检测标注的桌面工具。查看图片和标注框，删除错标，直接拖框补充漏标，每次修改自动保存。
+**直接拖框，松开即保存。**
+
+用于审核 YOLO 目标检测标注的桌面工具。在图片上按住鼠标左键拖动，就能补充漏标；每次修改自动保存。**画框无需先点击“添加”按钮，修改后无需点击“保存”按钮。**
+
+![直接拖框、松开自动保存，再按 A/D 切换图片](docs/assets/draw-save-zh.gif)
+
+*使用合成示例图片录制的实际界面：直接拖框，松开自动保存，按 D 继续下一张。*
+
+## 三个操作就能开始审核
+
+| 看到的问题 | 直接这样操作 | 结果 |
+| --- | --- | --- |
+| 漏标了一个目标 | 按住鼠标左键框住目标，松开 | 新框立即保存 |
+| 有一个错误标注 | 点击右侧对应条目，按 **Delete / Del** | 选中的框高亮，删除后立即保存 |
+| 这张看完了 | 按 **D** 下一张，按 **A** 上一张 | 长按连续切图，松开停止 |
+
+**画框 → 松手 → 继续审核。** 在已有框内部也能直接起笔画新框。多类别数据集先在右侧选择新增框的类别，后续绘制沿用该类别。当前图片改错了可按 **Ctrl+Z** 撤销。
 
 ## 功能
 
@@ -18,26 +34,58 @@
 
 需要 **Python 3.10 或更新版本**、PyQt5 和图形桌面。PyQt5 可在 Linux、Windows、macOS 上运行；本地已在 Linux 验证，CI 在 Linux 上检查 Python 3.10 和 3.12。
 
-下载或克隆代码后，在项目目录打开终端：
+### 获取代码
+
+仓库目前为私有。让别人使用时，可在仓库的 **Settings → Collaborators** 中邀请对方的 GitHub 账号；对方接受邀请后才能访问和克隆。也可以直接把源码 ZIP 发给对方。共享访问权限不需要将项目公开。
+
+进入 [GitHub 项目页面](https://github.com/t239573445/yolo-label-review)，点击 **Code → Download ZIP** 后解压；或者在已登录 GitHub 的环境中克隆：
 
 ```bash
-python -m venv .venv
+git clone https://github.com/t239573445/yolo-label-review.git
+cd yolo-label-review
 ```
 
-Linux/macOS 使用 `source .venv/bin/activate` 激活环境，Windows PowerShell 使用 `.venv\Scripts\Activate.ps1`。然后安装本地项目：
+### 首次安装
+
+在解压或克隆后的项目文件夹打开终端。
+
+**Linux / macOS**
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install .
 ```
 
-## 启动和语言
+**Windows PowerShell**
 
-```bash
-yolo-review "/你的数据集目录" --lang zh
-yolo-review "/你的数据集目录" --lang en
+```powershell
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install .
 ```
 
-也可使用 `python -m yolo_review "/你的数据集目录"`。不传数据集路径时打开当前工作目录；含空格的路径请加引号。源码目录中，安装 `requirements.txt` 的依赖后，也可直接运行 `python review_annotations.py "/你的数据集目录"`。
+安装命令会一并安装 PyQt5，不需要显卡、模型权重或模型推理服务。项目尚未发布到 PyPI，请按上面的方法在下载的项目目录中安装。
+
+## 启动和语言
+
+将示例路径替换为自己的数据集文件夹，其中应包含 `images/` 和 `labels/`。
+
+**Linux / macOS**（新开终端时需要重新激活同一个环境）：
+
+```bash
+source .venv/bin/activate
+yolo-review "/你的数据集目录" --lang zh
+```
+
+**Windows PowerShell**（在项目文件夹中运行）：
+
+```powershell
+.\.venv\Scripts\yolo-review.exe "D:\datasets\我的数据集" --lang zh
+```
+
+使用 `--lang en` 可打开英文界面。图片打开后，直接拖动鼠标画框，松开即保存；新增、删除、撤销和重做都自动保存。
+
+在已激活的虚拟环境中，也可使用 `python -m yolo_review "/你的数据集目录"`。不传数据集路径时打开当前工作目录；含空格的路径请加引号。源码目录中，安装 `requirements.txt` 的依赖后，也可直接运行 `python review_annotations.py "/你的数据集目录"`。
 
 顶部 **Language / 语言** 下拉框可即时切换语言，当前图片、框选状态和撤销记录会保留。默认 `--lang auto` 优先使用该数据集上次保存的语言，否则按系统语言选择：中文环境使用简体中文，其他环境使用英文。显式传入 `--lang zh` 或 `--lang en` 会覆盖已保存的选择。数据集自己的类别名称不会翻译。
 
@@ -92,21 +140,11 @@ class_id x_center y_center width height
 
 `.yolo_review/state.json` 保存图片位置和语言。仅查看图片、选框、切换语言不会改写标签。备份保存在数据集本地，需要迁移时请随数据集一起复制。
 
-## 开发与提交 GitHub
+## 开发
 
 开发环境、测试、代码格式、架构和构建命令见 [CONTRIBUTING.md](CONTRIBUTING.md)。GitHub Actions 在推送和 Pull Request 时自动检查。所有自动测试都使用临时生成的数据。
 
-上传本项目文件夹即可。`.gitignore` 排除了图片、标签、模型、审核备份、虚拟环境和构建缓存。先在 GitHub 创建空仓库，再在项目目录执行，替换 `YOUR_ACCOUNT` 为你的账户：
-
-```bash
-git init -b main
-git add .
-git commit -m "Initial YOLO Label Review release"
-git remote add origin https://github.com/YOUR_ACCOUNT/yolo-label-review.git
-git push -u origin main
-```
-
-项目尚未发布到 PyPI，请从源码仓库或本地构建的 wheel 安装。
+`.gitignore` 排除了图片、标签、模型、审核备份、虚拟环境和构建缓存。分享软件时，项目源码和数据集分别管理。
 
 ## 许可证
 
