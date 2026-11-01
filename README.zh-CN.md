@@ -1,4 +1,4 @@
-# YOLO Label Review · YOLO 标注审核
+# YOLO Label · YOLO 标注
 
 [English](README.md) | 简体中文
 
