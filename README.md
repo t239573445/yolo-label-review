@@ -8,7 +8,7 @@ A desktop tool for reviewing YOLO object detection annotations. Draw missing box
 
 ![Drag a box, release to save automatically, and use A/D to browse](docs/assets/draw-save-en.gif)
 
-*Recorded in the application using a synthetic demo image: draw, release to save, then press D for the next image.*
+*Recorded in the application using real dataset images: draw, release to save, then press D for the next image. The walkthrough uses copies to demonstrate adding a missing box; original annotations are preserved.*
 
 ## Start reviewing in three steps
 
