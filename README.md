@@ -36,9 +36,7 @@ Requires Python **3.10+**, PyQt5, and a graphical desktop. Linux, Windows, and m
 
 ### Get the code
 
-This repository is currently private. To let someone use it, invite their GitHub account in the repository's **Settings → Collaborators**; they must accept the invitation before opening or cloning it. You can also share a source ZIP directly with them. Sharing access does not make the repository public.
-
-On the [repository page](https://github.com/t239573445/yolo-label-review), select **Code → Download ZIP** and extract it, or clone it after signing in to GitHub:
+On the [repository page](https://github.com/t239573445/yolo-label-review), select **Code → Download ZIP** and extract it, or clone the repository:
 
 ```bash
 git clone https://github.com/t239573445/yolo-label-review.git

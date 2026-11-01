@@ -36,9 +36,7 @@
 
 ### 获取代码
 
-仓库目前为私有。让别人使用时，可在仓库的 **Settings → Collaborators** 中邀请对方的 GitHub 账号；对方接受邀请后才能访问和克隆。也可以直接把源码 ZIP 发给对方。共享访问权限不需要将项目公开。
-
-进入 [GitHub 项目页面](https://github.com/t239573445/yolo-label-review)，点击 **Code → Download ZIP** 后解压；或者在已登录 GitHub 的环境中克隆：
+进入 [GitHub 项目页面](https://github.com/t239573445/yolo-label-review)，点击 **Code → Download ZIP** 后解压；也可以使用 Git 克隆：
 
 ```bash
 git clone https://github.com/t239573445/yolo-label-review.git
